@@ -1,0 +1,6 @@
+.hover-blue:hover .heading {
+    color: #007bff;
+}
+.hover-blue:hover {
+	cursor: pointer;
+}
