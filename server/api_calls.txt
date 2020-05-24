@@ -1,0 +1,277 @@
+get product images 
+    let params = {
+        product_id: '5ebbd90740ea404a8cadb6ef'
+    }
+    let url = 'http://localhost:5000/product/images'
+    url+='?';
+    for(var key in params) {
+        url+=(key+'='+params[key]+'&');
+    }
+    console.log(url);
+    url.substr(0, url.length-2)
+    console.log(url)
+    fetch(url, {
+                method: 'GET',
+                headers: {
+                    Accept: 'application/json', 'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+                params: params
+            })
+                .then((res) =>{
+                    console.log(res)
+                    if(res.ok){
+                        console.log(res.json());
+                    }
+                    else {
+                        throw 'error'
+                    }
+                })
+                .catch((error) =>{
+                    console.log(error);
+                })
+
+
+product search
+
+    // adding queries to url
+    let filters = {} 
+    let params = {
+        search: 'akj',
+        ...filters
+    }
+    let url = 'http://localhost:5000/product/search'
+    url+='?';
+    for(var key in params) {
+        url+=(key+'='+params[key]+'&');
+    }
+    url.substr(0, url.length-2);
+
+    fetch(url, {
+                method: 'GET',
+                headers: {
+                    Accept: 'application/json', 'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+                params: params
+            })
+                .then((res) =>{
+                    console.log(res)
+                    if(res.ok){
+                        console.log(res.json());
+                    }
+                    else {
+                        throw 'error'
+                    }
+                })
+                .catch((error) =>{
+                    console.log(error);
+                })
+
+
+get products of loged in seller
+
+  fetch(`http://localhost:5000/seller/products`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include'
+        })
+            .then(res => res.json())
+            .then((res) => {
+                console.log(res)
+                //this.setState({ products: res.products })
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+
+
+api to add reviews
+    var review = {
+        message: 'bla bla',
+        rating: 4,
+        product_id: '5ebc3db2b222c575685f306d'
+    }  
+    fetch(`http://localhost:5000/customer/addProductReview`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+                body: JSON.stringify(review)
+            })
+                .then((res) => {
+                    console.log(res);
+                    return res.json();
+                 })
+                .then((res) => {
+                    console.log(res)
+                    //this.setState({ products: res.products })
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+
+
+add order api
+    post request on customer/addOrder
+    body = {
+        product = {
+            avg_rating: 4,
+            category_id: "5eb91ff7fe86363a20d2c5d8",
+            description: "afds",
+            estimated_days_to_deliver_by_seller: 12,
+            features: ["afds"],
+            main_photo: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAU0A",
+            name: "asfdjl",
+            number_of_reviews: 1,
+            options: (3) ["colors", "size", "storage"],
+            price: 123,
+            seller_id: "5eba70b1668ca74ae8cd221a",
+            unit_sold: 0,
+            unit_soled: 0,
+            __v: 0,
+            _id: "5ebfa3695a893036c43bbad1"
+        },
+        dilevery_address: 'cyz, akdfsj', // default original customer address
+        units: 1 // default 1
+    }
+
+
+
+add to cart
+    
+    let obj = {product_id: "5ebbd90740ea404a8cadb6ef"}
+    
+    fetch('http://localhost:5000/customer/addToCart', {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json', 'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+                body: JSON.stringify(obj)
+
+            })
+                .then((res) =>{
+                    console.log(res)
+                    if(res.ok){
+                        console.log(res.json());
+                    }
+                    else {
+                        throw 'error'
+                    }
+                })
+                .catch((error) =>{
+                    console.log(error);
+                })
+
+
+
+get cart
+    fetch('http://localhost:5000/customer/getCart', {
+                method: 'GET',
+                headers: {
+                    Accept: 'application/json', 'Content-Type': 'application/json'
+                },
+                credentials: 'include'
+
+            })
+                .then((res) =>{
+                    console.log(res)
+                    if(res.ok){
+                        res.json()
+                        .then((res) => {
+                            console.log(res);
+                        })
+                    }
+                    else {
+                        throw 'error'
+                    }
+                })
+                .catch((error) =>{
+                    console.log(error);
+                })
+
+check product is in cart or not
+    let params = {
+        product_id: '5ebbd90740ea404a8cadb6ef'
+    }
+    let url = 'http://localhost:5000/customer/isInCart'
+    url+='?';
+    for(var key in params) {
+        url+=(key+'='+params[key]+'&');
+    }
+    console.log(url);
+    url.substr(0, url.length-2)
+    console.log(url)
+    fetch(url, {
+                method: 'GET',
+                headers: {
+                    Accept: 'application/json', 'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+                params: params
+            })
+                .then((res) =>{
+                    console.log(res)
+                    if(res.ok){
+                        console.log(res.json());
+                    }
+                    else {
+                        throw 'error'
+                    }
+                })
+                .catch((error) =>{
+                    console.log(error);
+                })
+
+remove from cart
+    let obj = {product_id: "5ebd145f8d3e7486880a13f9"}
+    
+    fetch('http://localhost:5000/customer/removeFromCart', {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json', 'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+                body: JSON.stringify(obj)
+
+            })
+                .then((res) =>{
+                    console.log(res)
+                    if(res.ok){
+                        console.log(res.json());
+                    }
+                    else {
+                        throw 'error'
+                    }
+                })
+                .catch((error) =>{
+                    console.log(error);
+                })
+
+
+log in
+        let User = {
+            email: 'q',
+            password: 'q'
+        };
+
+        fetch("http://localhost:5000/customer/login", {
+            credentials: 'include',
+            method: "POST",
+            headers: {
+                Accept: 'application/json', 'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(User)
+        }).then(res => {
+            if (res.status === 200) {
+                console.log(res.json())
+            }
+            else {
+                this.setState({ show1: true, error: 'Credentials are invalid' });
+            }
+        })
+
