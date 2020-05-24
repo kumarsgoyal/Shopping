@@ -1,2 +1,1 @@
-# shopping
-shopping website using MERN sttack
+# shopping-cart
