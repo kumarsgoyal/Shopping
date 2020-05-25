@@ -40,4 +40,10 @@ productReviewsModel.addReview = (req, callback) => {
     productReviewsModel.create(review, callback);
 }
 
+productReviewsModel.isReviewed = (req, callback) => {
+    console.log(req.session.user_id+" ")
+    console.log(req.params.id)
+    productReviewsModel.find({customer_id:req.session.user_id,product_id:req.params.id}, callback);
+}
+
 module.exports = productReviewsModel;
