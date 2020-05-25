@@ -15,4 +15,15 @@ router.get('/allReviews/:id',(req,res)=>{
     })
 })
 
+router.delete('/deleteReview/:id',(req,res)=>{
+    ReviewModel.deleteOne({_id:req.params.id},(err,response)=>{
+        if(response){
+            res.status(200).send('success');
+        }
+        if(err){
+            res.status(501).send('error');
+        }
+    })
+})
+
 module.exports = router
