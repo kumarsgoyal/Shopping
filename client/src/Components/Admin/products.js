@@ -12,6 +12,19 @@ class Products extends Component{
             products:[]
         }
     }
+    onDelete=(event,id)=>{
+        event.preventDefault();
+        let url='http://localhost:5000/admin/deleteProduct/'
+        url+=id;
+        console.log(url);
+        fetch(url,{
+            method:"DELETE",
+            headers:{
+                'Content-Type':'application/json'
+            },credentials:'include'
+        })
+        .then(window.location.reload());
+    }
     componentDidMount(){
         if(this.props&&this.props.location&&this.props.location.state&&this.props.location.state.id)
         {
@@ -66,6 +79,7 @@ class Products extends Component{
                                         variant="contained"
                                         color="secondary"
                                         startIcon={<DeleteIcon />}
+                                        onClick={(event)=>this.onDelete(event,elem._id)}
                                     >
                                         Delete
                                     </Button> </td>
