@@ -211,5 +211,23 @@ router.get('/getCart', customerCookieValidator, (req, res) => {
     })
 })
 
+router.get('/isReviewed/:id', customerCookieValidator, (req, res) => {
+    ProductReviewsModel.isReviewed(req, (err, result) => {
+        if(err) {
+            console.log(err);
+            res.status(501).send("error");
+        }
+        if(result) {
+            console.log('result')
+            console.log(result);
+            if(result.length > 0) {
+                res.status(200).send({isReviewed: true,Review:result[0]});
+            }
+            else {
+                res.status(200).send({isReviewed: false,Review:result[0]});
+            }
+        }
+    })
+})
 
 module.exports = router
