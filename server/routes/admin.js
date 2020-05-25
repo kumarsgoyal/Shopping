@@ -4,8 +4,9 @@ const SellerModel =require('../models/sellermodel');
 const ClientModel=require('../models/clientmodel');
 const ProductModel=require('../models/productModel')
 const AdminModel=require('../models/adminModel')
+const ProductImagesModel=require('../models/productImagesModel')
+const ProductReviewModel=require('../models/productReviewsModel')
 const mongoose=require('mongoose')
-
 var bcrypt = require('bcryptjs');
 
 var salt = bcrypt.genSaltSync(10);
@@ -99,5 +100,25 @@ router.post('/login', function(req, res) {
     })
 })
 
+router.delete('/deleteProduct/:id',adminCookieValidator,(req,res,next)=>{
+    ProductModel.deleteOne({_id:req.params.id},(err,response)=>{
+        if(response){
+            next();
+        }
+    })
+},(req,res,next)=>{
+    ProductImagesModel.deleteOne({product_id:req.params.id},(err,response)=>{
+        if(response){
+            console.log('product images deleted')
+            next();
+        }
+    })
+},(req,res)=>{
+    ProductReviewModel.deleteMany({product_id:req.params.id},(error,response)=>{
+        if(response){
+            res.status(200).send('product deleted');
+        }
+    })
+})
 
 module.exports=router
