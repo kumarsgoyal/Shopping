@@ -55,7 +55,7 @@ class ReviewList extends Component{
     }
 
     editReview=()=>{
-
+        history.push({pathname:'/Product/EditReview',state:{Review:this.state.Review}})
     }
     render(){
         if(this.state.loaded&&this.state.reviews.length===0){
