@@ -230,4 +230,15 @@ router.get('/isReviewed/:id', customerCookieValidator, (req, res) => {
     })
 })
 
+router.put('/editProductReview',customerCookieValidator,(req,res)=>{
+    ProductReviewsModel.editReview(req,(err,response)=>{
+        if(response){
+            res.status(200).send('updated');
+        }
+        if(err){
+            res.status(501).send('error');
+        }
+    })
+})
+
 module.exports = router
