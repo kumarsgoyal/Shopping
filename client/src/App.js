@@ -15,6 +15,7 @@ import ProductsDisplay from './Components/ProductsDisplay/productList.js'
 import Pagenotfound from './Components/404/404.js'
 import ProductDetails from './Components/ProductsDisplay/productDetails'
 import AddReview from './Components/Reviews/addReview'
+import EditReview from './Components/Reviews/editReview'
 import Cart from './Components/Cart/cart.js'
 import AdminHome from './Components/Admin/homepage'
 import AdminSellers from './Components/Admin/sellers'
@@ -61,6 +62,7 @@ class App extends Component {
                     <Route exact path='/Products' component={ProductsDisplay} />
                     <Route exact path='/Product/ProductDetails' component={ProductDetails} />
                     <Route exact path='/Product/AddReview' component={AddReview} />
+                    <Route exact path='/Product/EditReview' component={EditReview} />
                     <Route exact path='/Seller/update_product*' component={addProduct} />
                     <Route exact path='/Seller/update_profile' component={Registershop} />
                     <Route exact path='/cart' component={Cart} />
