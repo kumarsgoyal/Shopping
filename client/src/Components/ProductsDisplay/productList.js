@@ -99,7 +99,7 @@ class ProductsList extends Component {
     buyNow=()=>{
         let productToBuy=[]
         productToBuy=this.state.products
-        history.push({pathname:'/Product/Buy',state:{products:productToBuy}})
+        history.push({pathname:'/Product/Buy',state:{products:productToBuy,throughCart:true}})
     }
     render(){
         if(this.state.loaded&&this.state.products.length==0)
