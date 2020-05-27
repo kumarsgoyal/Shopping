@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import Product from './product';
 import Loader from 'react-loader';
 import Navbar from './navbar';
-
-
+import Button from '@material-ui/core/Button';
+import history from '../../history'
 class ProductsList extends Component {
 
     constructor(props){
@@ -58,7 +58,11 @@ class ProductsList extends Component {
 			console.log(error);
 		})
     }
-    
+    buyNow=()=>{
+        let productToBuy=[]
+        productToBuy=this.state.products
+        history.push({pathname:'/Product/Buy',state:{products:productToBuy}})
+    }
     render(){
         if(this.state.loaded&&this.state.products.length==0)
             return <div>
@@ -68,6 +72,11 @@ class ProductsList extends Component {
 	    </div>
         else
         {
+            let buyComp=<div></div>
+            if(this.props.forCart)
+                buyComp=<center><Button variant="contained" color="secondary" size="large" onClick={this.buyNow}>
+                	Buy Now
+            	</Button></center>
             return <Loader loaded={this.state.loaded} >
                 <Navbar {...this.props} />
                 <hr />
@@ -78,6 +87,7 @@ class ProductsList extends Component {
                         })}
                     </tbody>
                 </table>
+                {buyComp}
             </Loader>
       }
     }
