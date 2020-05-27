@@ -44,7 +44,21 @@ class Buy extends Component{
                 },
                 credentials: 'include',
                 body: JSON.stringify(order)
-            }).then(res=>history.push({pathname:'/Products', state:{inputValue:""}}))
+            }).then(res=>{
+                history.push({pathname:'/Products', state:{inputValue:""}})
+                if(this.props.location.state.throughCart){
+                    let obj = {product_id: elem.product._id}
+                    fetch('http://localhost:5000/customer/removeFromCart', {
+                        method: 'POST',
+                        headers: {
+                            Accept: 'application/json', 'Content-Type': 'application/json'
+                        },
+                        credentials: 'include',
+                        body: JSON.stringify(obj)
+                    }).then(res=>console.log('done'))
+                    .catch(res=>console.log('failed to remove from cart'))
+                }
+            })
         })
     }
     totalAmount=()=>{
