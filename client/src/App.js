@@ -23,7 +23,6 @@ import AdminCustomers from './Components/Admin/customers'
 import AdminProducts from './Components/Admin/products'
 import LoginAdmin from './Components/Login/loginadmin'
 import Buy from './Components/Buy/buy'
-
 class App extends Component {
     constructor(props) {
         super(props);

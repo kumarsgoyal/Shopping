@@ -57,6 +57,44 @@ class ProductsList extends Component {
 		.catch((error) =>{
 			console.log(error);
 		})
+        
+    }
+    UNSAFE_componentWillReceiveProps(newProps){
+        if(newProps&&newProps.location&&newProps.location.state){
+            let inputValue = newProps.location.state.inputValue
+            console.log(this)
+            let filters = {} 
+            
+            let params = {
+                search: inputValue,
+                ...filters
+            }
+            
+            let url = 'http://localhost:5000/product/search'
+            url+='?';
+            
+            for(var key in params) {
+                url+=(key+'='+params[key]+'&');
+            }
+            
+            url.substr(0, url.length-2);
+
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    Accept: 'application/json', 'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+                params: params
+            })
+            .then(res=>res.json())
+            .then((res) =>{
+                this.setState({products:res.products,loaded:true})
+            })
+            .catch((error) =>{
+                console.log(error);
+            })
+        }
     }
     buyNow=()=>{
         let productToBuy=[]
@@ -75,8 +113,8 @@ class ProductsList extends Component {
             let buyComp=<div></div>
             if(this.props.forCart)
                 buyComp=<center><Button variant="contained" color="secondary" size="large" onClick={this.buyNow}>
-                	Buy Now
-            	</Button></center>
+                Buy Now
+            </Button></center>
             return <Loader loaded={this.state.loaded} >
                 <Navbar {...this.props} />
                 <hr />

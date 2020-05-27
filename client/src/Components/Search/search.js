@@ -22,7 +22,6 @@ class Search extends Component{
 		if(this.state.inputValue.length>0)
 		{
 			this.props.history.push({pathname:'/Products',state:{inputValue:this.state.inputValue}});
-			window.location.reload();
 		}
 	  }
   
