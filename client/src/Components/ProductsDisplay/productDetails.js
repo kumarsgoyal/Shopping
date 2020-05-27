@@ -4,7 +4,7 @@ import ImageSlides from './imageSlides'
 import ReviewList from '../Reviews/reviewList'
 import Navbar from './navbar';
 import Button from '@material-ui/core/Button';
-
+import history from '../../history'
 class ProductsDetails extends Component {
 
     constructor(props){
@@ -135,7 +135,11 @@ class ProductsDetails extends Component {
             .catch((error) =>{
                 console.log(error);
             })
-
+    }
+    buyNow=()=>{
+        let productToBuy=[]
+        productToBuy.push(this.state.productDetails);
+        history.push({pathname:'/Product/Buy',state:{products:productToBuy}})
     }
     render(){
 
@@ -196,7 +200,7 @@ class ProductsDetails extends Component {
 
                             </div>
                             <p style={{height:'5vh'}}>
-                                <Button variant="contained" color="secondary" size="large">
+                                <Button variant="contained" color="secondary" size="large" onClick={this.buyNow}>
                                     Buy Now
                                 </Button>
                             </p>
