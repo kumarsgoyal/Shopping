@@ -23,16 +23,16 @@ cartModel.getCart = (req, callback) => {
 cartModel.addProduct = (req, callback) => {
     cartModel.find({customer_id: req.session.user_id}, (err, result) => {
         if(result && result.length === 0) {
-            console.log('created array');
+            // console.log('created array');
             cartModel.create({customer_id: mongoose.Types.ObjectId(req.session.user_id), products: [mongoose.Types.ObjectId(req.body.product_id)]}, callback)
         }
         else if(result && result.length > 0) {
-            console.log('added in array');
+            // console.log('added in array');
             cartModel.findOneAndUpdate({customer_id: mongoose.Types.ObjectId(req.session.user_id)}, {"$addToSet": {products: mongoose.Types.ObjectId(req.body.product_id)}}, callback)
         }
 
         if(err) {
-            console.log(err);
+            // console.log(err);
         }
     })
 }

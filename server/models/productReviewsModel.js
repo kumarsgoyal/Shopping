@@ -39,21 +39,18 @@ productReviewsModel.addReview = (req, callback) => {
     review.customer_name=req.body.customer_name;
     productReviewsModel.create(review, callback);
 }
-
 productReviewsModel.editReview=(req,callback)=>{
     let review = {};
-    console.log(req.body.review_id)
+    // console.log(req.body.review_id)
     productReviewsModel.update({_id:req.body.review_id},{$set:{
         customer_name:req.body.customer_name,
         message:req.body.review,
         rating:req.body.rating
     }},callback)
 }
-
 productReviewsModel.isReviewed = (req, callback) => {
-    console.log(req.session.user_id+" ")
-    console.log(req.params.id)
+    // console.log(req.session.user_id+" ")
+    // console.log(req.params.id)
     productReviewsModel.find({customer_id:req.session.user_id,product_id:req.params.id}, callback);
 }
-
 module.exports = productReviewsModel;

@@ -52,7 +52,7 @@ SellerModel = mongoose.model("Seller", Seller);
 
 SellerModel.updateProfile = (req, callback) => {
     const x = validateRegisterInput(req.body);
-    console.log('update profile', x);
+    // console.log('update profile', x);
     if(x.isValid === true) {
         hash = bcrypt.hashSync(req.body.password1, salt); 
         let seller = {

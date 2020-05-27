@@ -97,6 +97,7 @@ router.post('/register', function(req, res) {
 
 
 router.post('/addOrder', customerCookieValidator, (req, res) => {
+    console.log("sasasa");
     OrderModel.addOrder(req, (error, response) => {
         // req.body = {product, delivery_address, units}
         if(error) {
@@ -147,11 +148,11 @@ router.post('/addProductReview', customerCookieValidator, (req, res) => {
 router.post('/addToCart', customerCookieValidator, (req, res) => {
     CartModel.addProduct(req, (err, result) => {
         if(err) {
-            console.log(err);
+            // console.log(err);
             res.status(501).send("error");
         }
         if(result) {
-            console.log(result);
+            // console.log(result);
             res.status(200).send("success");
         }
     })
@@ -161,11 +162,11 @@ router.post('/addToCart', customerCookieValidator, (req, res) => {
 router.post('/removeFromCart', customerCookieValidator, (req, res) => {
     CartModel.removeProduct(req, (err, result) => {
         if(err) {
-            console.log(err);
+            // console.log(err);
             res.status(501).send("error");
         }
         if(result) {
-            console.log(result);
+            // console.log(result);
             res.status(200).send("success");
         }
     })
@@ -174,11 +175,11 @@ router.post('/removeFromCart', customerCookieValidator, (req, res) => {
 router.get('/isInCart', customerCookieValidator, (req, res) => {
     CartModel.isInCart(req, (err, result) => {
         if(err) {
-            console.log(err);
+            // console.log(err);
             res.status(501).send("error");
         }
         if(result) {
-            console.log(result);
+            // console.log(result);
             if(result.length > 0) {
                 res.status(200).send({isInCart: true});
             }
@@ -192,18 +193,18 @@ router.get('/isInCart', customerCookieValidator, (req, res) => {
 router.get('/getCart', customerCookieValidator, (req, res) => {
     CartModel.addProduct(req, (err, result) => {
         if(err) {
-            console.log(err);
+            // console.log(err);
             res.status(501).send("error");
         }
         if(result) {
-            console.log(result);
+            // console.log(result);
             ProductModel.getProductsFromIds(result.products, (e, r) => {
                 if(e) {
-                    console.log(e);
+                    // console.log(e);
                     res.status(501).send("error");
                 }
                 if(r) {
-                    console.log(r);
+                    // console.log(r);
                     res.status(200).send({products: r});
                 }
             })
@@ -214,12 +215,11 @@ router.get('/getCart', customerCookieValidator, (req, res) => {
 router.get('/isReviewed/:id', customerCookieValidator, (req, res) => {
     ProductReviewsModel.isReviewed(req, (err, result) => {
         if(err) {
-            console.log(err);
+            // console.log(err);
             res.status(501).send("error");
         }
         if(result) {
-            console.log('result')
-            console.log(result);
+            // console.log(result);
             if(result.length > 0) {
                 res.status(200).send({isReviewed: true,Review:result[0]});
             }

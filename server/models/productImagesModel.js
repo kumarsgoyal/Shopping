@@ -31,7 +31,7 @@ productImageModel.updateProductImages = (product_images, callback) => {
 productImageModel.getProductImages = (req, callback) => {
     let query = {};
     query.product_id = req.query.product_id;
-    console.log(`image query`, req.query, query);
+    // console.log(`image query`, req.query, query);
     productImageModel.findOne(query, callback);
 }
 

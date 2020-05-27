@@ -105,7 +105,7 @@ productModel.getAllNames=(product,callback)=>{
 }
 
 productModel.increaseProductUnitSold = (req, callback) => {
-    console.log(req.body.product._id);
+    // console.log(req.body.product._id);
     productModel.findOneAndUpdate({_id: mongoose.Types.ObjectId(req.body.product._id)}, {$inc: {unit_sold: req.body.units}}, callback);
 }
 
@@ -116,11 +116,11 @@ productModel.updateReviews = (req, callback) => {
         {$group: {_id: "$product_id", average_rating: {$avg: "$rating"}, number_of_reviews: {$sum: 1} } }
     ], (err, res) => {
         if(err) {
-            console.log(err);
+            // console.log(err);
             res.status(501).send("error");
         }
         if(res) {
-            console.log('inside update rating of product', res);
+            // console.log('inside update rating of product', res);
             // if(res.length > 0) {
             productModel.findOneAndUpdate({_id: mongoose.Types.ObjectId(req.body.product_id)}, {$set: {avg_rating: res[0]['average_rating']}, number_of_reviews: res[0]['number_of_reviews']}, callback)
             // }
@@ -134,7 +134,7 @@ productModel.getProductsFromIds = (product_ids, callback) => {
         return mongoose.Types.ObjectId(id);
     })
 
-    console.log(product_ids, product_ObjectIds);
+    // console.log(product_ids, product_ObjectIds);
     productModel.find({
             '_id': {
                 $in: product_ObjectIds 

@@ -48,16 +48,16 @@ orderModel.getSellerOrders = (req, callback) => {
 
 orderModel.addOrder = (req, callback) => {
     let product = req.body.product;
-    let customer_id = req.session.user_id;
+    let cust_id = req.session.user_id;
     let order_date = new Date();
-    // console.log(order_date, order_date.toLocaleDateString());
+    //  console.log(order_date, order_date.toLocaleDateString());
     let expected_delivery_date = new Date()
     expected_delivery_date.setDate(order_date.getDate() + product.estimated_days_to_deliver_by_seller);
     // console.log(expected_delivery_date.toLocaleDateString());
     let totalAmount = req.body.units * product.price;
-    let order = {totalAmount, units: req.body.units, customer_id, product_id: product._id, seller_id: product.seller_id,delivery_address: req.body.delivery_address, order_date: order_date.toString(), expected_delivery_date: expected_delivery_date.toString(), status: 'delivery_pending'}
-    console.log(order);
+    let order = {total_amount:totalAmount, units: req.body.units, customer_id:cust_id, product_id: product._id, seller_id: product.seller_id,delivery_address: req.body.delivery_address, order_date: order_date.toString(), expected_delivery_date: expected_delivery_date.toString(), status: 'delivery_pending'}
+    // console.log(order);
     orderModel.create(order, callback);
 }
 
-module.exports = orderModel;
+module.exports = orderModel; 

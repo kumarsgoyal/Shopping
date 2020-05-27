@@ -13,7 +13,6 @@ const categoryModel = mongoose.model('category', categorySchema);
 
 categoryModel.addCategory = (req, callback) => {
     // console.log(req.body)
-    console.log(req)
     categoryModel.create(req, callback)
 }
 

@@ -15,21 +15,21 @@ var hash;
 
 const adminCookieValidator = (req, res, next) => {
     console.log('cookie validator called');
-    console.log(req.session.user_id, req.session.account_type);
+    // console.log(req.session.user_id, req.session.account_type);
     if(req.session.user_id && req.session.account_type === 'admin'){
         AdminModel.findOne({_id: mongoose.Types.ObjectId(req.session.user_id)}, (error, result)=>{
-            console.log('result', result);
+            // console.log('result', result);
             if(error){
-                console.log(error);
+                // console.log(error);
                 res.status(501).send({error: true,message: 'server eroor'})
             }
             if(result)
             {
-                console.log('Admin vallidated');
+                // console.log('Admin vallidated');
                 next();
             }
             else{
-                console.log('no ADmin found');
+                // console.log('no ADmin found');
                 res.status(401).send({error: false, message: 'not authenticated', loginRequired: true})
             }
         })
@@ -42,11 +42,11 @@ const adminCookieValidator = (req, res, next) => {
 
 
 router.get('/',(req,res)=>{
-    console.log('req comes at /')
+    // console.log('req comes at /')
     res.send('hello')
 })
 router.get('/getAllSellers',adminCookieValidator,(req,res)=>{
-    console.log('req comes at /getsellers')
+    // console.log('req comes at /getsellers')
     SellerModel.find({},(err,response)=>{
         if(response){
             res.status(200).send({response});
@@ -83,7 +83,7 @@ router.post('/login', function(req, res) {
     AdminModel.findOne({email: req.body.email}, function(err, admin) {
         if(admin) {
             if(bcrypt.compareSync(req.body.password, admin.password)) {
-                console.log(admin._id);
+                // console.log(admin._id);
                 req.session.account_type = 'admin';
                 req.session.user_id = admin._id;
                 res.status(200).send({admin: admin});
@@ -109,7 +109,7 @@ router.delete('/deleteProduct/:id',adminCookieValidator,(req,res,next)=>{
 },(req,res,next)=>{
     ProductImagesModel.deleteOne({product_id:req.params.id},(err,response)=>{
         if(response){
-            console.log('product images deleted')
+            // console.log('product images deleted')
             next();
         }
     })
