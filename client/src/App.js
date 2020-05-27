@@ -22,6 +22,7 @@ import AdminSellers from './Components/Admin/sellers'
 import AdminCustomers from './Components/Admin/customers'
 import AdminProducts from './Components/Admin/products'
 import LoginAdmin from './Components/Login/loginadmin'
+import Buy from './Components/Buy/buy'
 
 class App extends Component {
     constructor(props) {
@@ -71,6 +72,7 @@ class App extends Component {
                     <Route exact path='/Admin/Customers' component={AdminCustomers} />
                     <Route exact path='/Admin/Products' component={AdminProducts} />
                     <Route exact path='/Admin/Login' component={LoginAdmin} />
+                    <Route exact path='/Product/Buy' component={Buy} />
                     <Route path='/*' component={Pagenotfound} />
                 </Switch>
             </Router>
