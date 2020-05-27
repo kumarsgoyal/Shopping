@@ -139,7 +139,7 @@ class ProductsDetails extends Component {
     buyNow=()=>{
         let productToBuy=[]
         productToBuy.push(this.state.productDetails);
-        history.push({pathname:'/Product/Buy',state:{products:productToBuy}})
+        history.push({pathname:'/Product/Buy',state:{products:productToBuy,throughCart:false}})
     }
     render(){
 
