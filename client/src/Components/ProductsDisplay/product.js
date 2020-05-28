@@ -10,11 +10,11 @@ class Product extends Component{
     render(){
         return <tr>
             <td>
-                    <div className="row">
+                    <div className="row" style={{height:'40vh'}}>
                         <div className="col-1">
 
                         </div>
-                        <div className="col-3">
+                        <div className="col-3" style={{height:'40vh'}}>
                             <img alt="imagesrcc" width="100%" height="100%" src={this.props.product.main_photo} />
                         </div>
                         <div className="col-1">

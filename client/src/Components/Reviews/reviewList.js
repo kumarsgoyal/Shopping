@@ -76,17 +76,27 @@ class ReviewList extends Component{
                 userrev=<div>
                     <hr />
                     <div><h3>Your review</h3></div>
-                    <div>Name:{this.state.Review.customer_name}</div>
+                    <div>Name: {this.state.Review.customer_name}</div>
+                    <div>Message: {this.state.Review.message}</div>
                     <StarRating 
                     starRatedColor="red"
                     rating={this.state.Review.rating}
                     starDimension="20px"
                     starSpacing="10px"
                     />
-                    <div>Message:{this.state.Review.message}</div>
+                    <div style={{height:'10px'}}>
+
+                    </div>
                     <div>
-                        <button onClick={this.deleteReview}>Delete Review</button>
-                        <button onClick={this.editReview}>Edit Review</button>
+                        <Button variant="contained" color="secondary" size="medium" onClick={this.deleteReview}>
+                            Delete Review
+                        </Button>
+                        <span style={{margin:'10px'}}>
+
+                        </span>
+                        <Button variant="contained" color="secondary" size="medium" onClick={this.editReview}>
+                            Edit Review
+                        </Button>
                     </div>
                 </div>
             }
