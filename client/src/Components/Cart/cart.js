@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import ProductList from '../ProductsDisplay/productList.js';
+import history from '../../history';
+
 class cart extends Component {
 
 	constructor(props) {
@@ -20,15 +22,6 @@ class cart extends Component {
             credentials: 'include'
 
         })
-            .then((res) =>{
-                // console.log(res)
-                if(res.ok){
-                    return res.json()
-                }
-                else {
-                    throw 'error'
-                }
-            })
 	}
 	render() {
 		return <ProductList forCart={true} loadCartProducts={this.loadCartProducts} />

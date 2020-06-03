@@ -18,14 +18,35 @@ class ProductsList extends Component {
         this.setState({loaded:false})
         if(this.props.forCart) {
             this.props.loadCartProducts()
+            .then((res) =>{
+                console.log(res)
+                if(res.status === 200){
+                    return res.json()
+                }
+                else if(res.status === 401) {
+                    history.push({
+                            pathname: '/Customer/Login',
+                            state: {
+                                isRedirected: true
+                            }
+                        })
+                    throw 'not authenticated'
+                }
+            })
             .then((res) => {
                 // console.log(res.products);
                 this.setState({products: res.products, loaded: true})
             })
+            .catch((err) => {
+                console.log(err);
+            })
             return;
         }
-        let inputValue = this.props.location.state.inputValue
-        // console.log(this)
+        let inputValue = '';
+        if(this.props.location && this.props.location.state)
+            inputValue = this.props.location.state.inputValue;
+        
+            // console.log(this)
         let filters = {} 
         
 		let params = {

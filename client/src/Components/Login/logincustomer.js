@@ -35,7 +35,10 @@ class Logincomp extends Component {
 	}
 
 	renderRedirect = () => {
-		this.props.history.push({pathname:'/Products', state:{inputValue:""}});
+		if(this.props.location && this.props.location.state && this.props.location.state.isRedirected)
+			this.props.history.goBack();
+		else
+			this.props.history.push({pathname:'/Products', state:{inputValue:""}});
 	}
 
 	clickHandler = (event) => {

@@ -43,7 +43,13 @@ class ProductsDetails extends Component {
                     console.log('added');
                 }
                 else if(res.status === 401) {
-                    console.log('unauthorized');
+                    // console.log('unauthorized');
+                    history.push({
+                        pathname: '/Customer/Login',
+                        state: {
+                            isRedirected: true
+                        }
+                    })
                 }
                 else {
                     throw 'error'
@@ -125,7 +131,8 @@ class ProductsDetails extends Component {
                     return res.json();
                 }
                 else {
-                    throw 'error'
+                    this.setState({isInCart: false, isInCartLoaded: true});
+                    throw 'failed to check product is in cart';
                 }
             })
             .then((res) => {
