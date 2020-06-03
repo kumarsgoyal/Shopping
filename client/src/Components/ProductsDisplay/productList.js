@@ -19,13 +19,13 @@ class ProductsList extends Component {
         if(this.props.forCart) {
             this.props.loadCartProducts()
             .then((res) => {
-                console.log(res.products);
+                // console.log(res.products);
                 this.setState({products: res.products, loaded: true})
             })
             return;
         }
         let inputValue = this.props.location.state.inputValue
-        console.log(this)
+        // console.log(this)
         let filters = {} 
         
 		let params = {
@@ -62,7 +62,7 @@ class ProductsList extends Component {
     UNSAFE_componentWillReceiveProps(newProps){
         if(newProps&&newProps.location&&newProps.location.state){
             let inputValue = newProps.location.state.inputValue
-            console.log(this)
+            // console.log(this)
             let filters = {} 
             
             let params = {

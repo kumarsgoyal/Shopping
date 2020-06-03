@@ -8,7 +8,7 @@ var demo = {
     className: "img-fluid",
     backgroundImage: `url(${Background})`,
     backgroundSize: '100% 100%',
-    height: '85vh'
+    height: '100vh'
 };
 
 class HomePage extends Component{

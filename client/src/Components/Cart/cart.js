@@ -4,7 +4,7 @@ class cart extends Component {
 
 	constructor(props) {
 		super(props);
-		console.log(ProductList);
+		// console.log(ProductList);
 		this.state = {
 			products: [],
 			isLoading: true
@@ -21,7 +21,7 @@ class cart extends Component {
 
         })
             .then((res) =>{
-                console.log(res)
+                // console.log(res)
                 if(res.ok){
                     return res.json()
                 }

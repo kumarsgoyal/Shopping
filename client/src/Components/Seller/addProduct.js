@@ -19,6 +19,7 @@ class AddProduct extends Component {
         this.state = {
             productName: '',
             productPrice: '',
+            stock: '',
             selectedCategoryName: '',
             selectedCategoryId: null,
             categories: [],
@@ -63,14 +64,14 @@ class AddProduct extends Component {
     }
     handleSubmit(e) {
         e.preventDefault();
-        let { productName: name, productPrice: price, selectedCategoryId: category_id, deliveryDays: estimated_days_to_deliver_by_seller, mainPhoto: main_photo, productFeatures: features, availableOptions: options, productDescription: description, additionalImages, update } = this.state
+        let { productName: name, productPrice: price, stock: stock, selectedCategoryId: category_id, deliveryDays: estimated_days_to_deliver_by_seller, mainPhoto: main_photo, productFeatures: features, availableOptions: options, productDescription: description, additionalImages, update } = this.state
 
         // by default first one is selected
         if (category_id === null) {
             category_id = this.state.categories[0]._id;
         }
 
-        let obj = { name, price, category_id, estimated_days_to_deliver_by_seller, options, main_photo, features, description, additionalImages}
+        let obj = { name, price, stock, category_id, estimated_days_to_deliver_by_seller, options, main_photo, features, description, additionalImages}
         
         let url = 'http://localhost:5000/seller/';
         if(this.state.update) {
@@ -179,9 +180,9 @@ class AddProduct extends Component {
                     // console.log(res);
                     let {product} = res;
                     console.log(product);
-                    let {name: productName, price: productPrice, description: productDescription, estimated_days_to_deliver_by_seller: deliveryDays, main_photo: mainPhoto, features: productFeatures} = product;
-                    console.log({productName, productPrice, productDescription, deliveryDays, mainPhoto, productFeatures});
-                    this.setState({productName, productPrice, productDescription, deliveryDays, mainPhoto, productFeatures});
+                    let {name: productName, price: productPrice, stock: stock, description: productDescription, estimated_days_to_deliver_by_seller: deliveryDays, main_photo: mainPhoto, features: productFeatures} = product;
+                    // console.log({productName, productPrice, productDescription, deliveryDays, mainPhoto, productFeatures});
+                    this.setState({productName, productPrice, stock, productDescription, deliveryDays, mainPhoto, productFeatures});
                     // this.setState({: res.categories })
                 })
                 .catch((err) => {
@@ -333,6 +334,25 @@ class AddProduct extends Component {
                                         //)
                                         )}
                                     </TextField>
+                                    <div style={{ height: '30px' }}>
+
+                                    </div>
+                                    <TextField
+                                        type="number"
+                                        id="stock"
+                                        label="Item in Stock"
+                                        variant="outlined"
+                                        required
+                                        fullWidth
+                                        value={this.state.stock}
+                                        onChange={(event) => {
+                                            console.log(event.target.value);
+                                            if (event.target.value < 0)
+                                                return
+                                            else
+                                                this.setState({ stock: event.target.value })
+                                        }}
+                                    />
                                 </div>
 
                                 <hr />

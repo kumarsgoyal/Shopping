@@ -11,6 +11,7 @@ class ProductsDetails extends Component {
         super(props);
         this.state={
             productDetails: {features:[]},
+            left: '',
             images:[],
             loaded: true,
             isInCart: false,
@@ -35,7 +36,7 @@ class ProductsDetails extends Component {
 
         })
             .then((res) =>{
-                console.log(res)
+                // console.log(res)
                 this.setState({isInCartLoaded: true})
                 if(res.status === 200){
                     this.setState({isInCart: true});
@@ -68,7 +69,7 @@ class ProductsDetails extends Component {
         })
             .then((res) =>{
                 this.setState({isInCartLoaded: true})
-                console.log(res)
+                // console.log(res)
                 if(res.status === 200){
                     this.setState({isInCart: false});
                 }
@@ -92,7 +93,7 @@ class ProductsDetails extends Component {
         url+='?product_id=';
         url+=id;
         fetch(url).then(res=>res.json())
-        .then(res=>this.setState({loaded1:true,productDetails:res.product}));
+        .then(res=>this.setState({loaded1:true, productDetails:res.product, left: res.product.stock-res.product.unit_sold}));
         url = 'http://localhost:5000/product/images';
         url+='?product_id=';
         url+=id;
@@ -108,9 +109,7 @@ class ProductsDetails extends Component {
         for(var key in params) {
             url2+=(key+'='+params[key]+'&');
         }
-        console.log(url2);
         url.substr(0, url2.length-2)
-        console.log(url2)
         fetch(url2, {
             method: 'GET',
             headers: {
@@ -120,7 +119,7 @@ class ProductsDetails extends Component {
             params: params
         })
             .then((res) =>{
-                console.log(res)
+                // console.log(res)
                 if(res.status === 200){
                     // console.log(res.json());
                     return res.json();
@@ -135,6 +134,9 @@ class ProductsDetails extends Component {
             .catch((error) =>{
                 console.log(error);
             })
+
+            this.setState({left: this.state.productDetails.stock - this.state.productDetails.unit_sold});
+
     }
     buyNow=()=>{
         let productToBuy=[]
@@ -191,19 +193,19 @@ class ProductsDetails extends Component {
                             <div style={{height: '10vh'}}>
 
                             </div>
-                            <p style={{height:'5vh', fontFamily: 'Courier New', textAlign: 'center', fontWeight: 'bold', verticalAlign: 'middle'}}>
+                            <div style={{height:'5vh', fontFamily: 'Courier New', textAlign: 'center', fontWeight: 'bold', verticalAlign: 'middle'}}>
                                 <Loader loaded={this.state.isInCartLoaded} >
                                     {addToCart}
                                 </Loader>
-                            </p>
+                            </div>
                             <div style={{height: '5vh'}}>
 
                             </div>
-                            <p style={{height:'5vh'}}>
+                            <div style={{height:'5vh'}}>
                                 <Button variant="contained" color="secondary" size="large" onClick={this.buyNow}>
                                     Buy Now
                                 </Button>
-                            </p>
+                            </div>
                             <div style={{height: '5vh'}}>
 
                             </div>
@@ -228,6 +230,11 @@ class ProductsDetails extends Component {
                         return <li key={index}>{elem}</li>
                     })}</ul>
                     <hr />
+                    <h2 style={{fontFamily: 'Courier New', fontWeight: 'bold', verticalAlign: 'middle'}}>
+                        Left in stock:
+                    </h2>
+                    {this.state.left}
+                    <hr/>
                     <h2 style={{fontFamily: 'Courier New', fontWeight: 'bold', verticalAlign: 'middle'}}>
                         Reviews:
                     </h2>
