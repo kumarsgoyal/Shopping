@@ -46,7 +46,7 @@ router.post('/login', function(req, res) {
                 // req.session.email = user.email;
                 req.session.account_type = 'customer';
                 req.session.user_id = user._id;
-                res.status(200).send({user: user});
+                res.status(200).send({user: user.first_name + " " + user.last_name, account_type: 'customer'});
             }
             else {
                 res.status(401).send("Oh uh, something went wrong");

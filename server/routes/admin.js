@@ -86,7 +86,7 @@ router.post('/login', function(req, res) {
                 // console.log(admin._id);
                 req.session.account_type = 'admin';
                 req.session.user_id = admin._id;
-                res.status(200).send({admin: admin});
+                res.status(200).send({user: user.first_name + " " + user.last_name, account_type: 'admin'});
             }
             else {
                 res.status(401).send("Oh uh, something went wrong");

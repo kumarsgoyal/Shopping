@@ -8,8 +8,8 @@ const seller = require('./routes/seller');
 const category = require('./routes/category');
 const product = require('./routes/product.js');
 const customer = require('./routes/customer.js');
-const review =require('./routes/review.js');
-const admin=require('./routes/admin');
+const review = require('./routes/review.js');
+const admin = require('./routes/admin');
 
 const app = express();
 
