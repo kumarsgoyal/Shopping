@@ -12,18 +12,19 @@ class Buy extends Component{
     constructor(props){
         super(props);
         this.state={
-            del_add:"",
-            products:[]
+            del_add : "",
+            // left : [],
+            products : []
         }
     }
     componentDidMount(){
-        console.log(this.props.location.state)
+        // console.log(this.props.location.state)
         let prodt=this.props.location.state.products
         prodt.map(elem=>{
-            console.log(elem);
+            // console.log(elem);
             let prod_obj={};
-            prod_obj.units=1;
-            prod_obj.product=elem;
+            prod_obj.units = 0;
+            prod_obj.product = elem;
             let prds=this.state.products;
             prds.push(prod_obj);
             this.setState({products:prds});
@@ -31,34 +32,40 @@ class Buy extends Component{
     }
     handleSubmit=(event)=>{
         event.preventDefault();
-        console.log(this.state.products)
-        this.state.products.map((elem)=>{
-            let order={};
-            order.product=elem.product;
-            order.units=elem.units;
-            order.delivery_address=this.state.del_add;
-            fetch('http://localhost:5000/customer/addOrder',{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include',
-                body: JSON.stringify(order)
-            }).then(res=>{
-                history.push({pathname:'/Products', state:{inputValue:""}})
-                if(this.props.location.state.throughCart){
-                    let obj = {product_id: elem.product._id}
-                    fetch('http://localhost:5000/customer/removeFromCart', {
-                        method: 'POST',
-                        headers: {
-                            Accept: 'application/json', 'Content-Type': 'application/json'
-                        },
-                        credentials: 'include',
-                        body: JSON.stringify(obj)
-                    }).then(res=>console.log('done'))
-                    .catch(res=>console.log('failed to remove from cart'))
-                }
-            })
+        // console.log(this.state.products)
+        this.state.products.map((elem) => {
+            let order = {};
+            order.product = elem.product;
+            order.units = elem.units;
+            order.delivery_address = this.state.del_add;
+    
+            if(elem.units == 0) {
+
+            }
+            else {
+                fetch('http://localhost:5000/customer/addOrder',{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify(order)
+                }).then(res=>{
+                    history.push({pathname:'/Products', state:{inputValue:""}})
+                    if(this.props.location.state.throughCart){
+                        let obj = {product_id: elem.product._id}
+                        fetch('http://localhost:5000/customer/removeFromCart', {
+                            method: 'POST',
+                            headers: {
+                                Accept: 'application/json', 'Content-Type': 'application/json'
+                            },
+                            credentials: 'include',
+                            body: JSON.stringify(obj)
+                        }).then(res=>console.log('done'))
+                        .catch(res=>console.log('failed to remove from cart'))
+                    }
+                })
+            }
         })
     }
     totalAmount=()=>{
@@ -69,20 +76,14 @@ class Buy extends Component{
         return total;
     }
     render(){
-        console.log(this.state.products)
+        // console.log(this.state.products)
         return(
-            <div style={demo}>
-                <div style={{height:'100px'}}>
-
-                </div>
-
-                <div>
                 <div className="row">
                     <div className="col-sm-1">
 
                     </div>
 
-                    <div className="col-sm-4" style={{backgroundColor:'white'}}>
+                    <div className="col-sm-10" style={{backgroundColor:'white'}}>
                         <form onSubmit={this.handleSubmit} style={{paddingBottom: '10px'}}>
                             <hr />
                             <div>
@@ -101,30 +102,32 @@ class Buy extends Component{
                                 <div style={{ height: '30px' }}>
 
                                 </div>
-                                {this.state.products.map((elem,index)=>{
-                                    return <div style={{border:"1px solid black",padding:"10px"}}>
-                                        <div className="row">
-                                            <div className="col-1">
+                                {this.state.products.map((elem, index)=>{
+                                    let prods = this.state.products;
+                                    let left = prods[index].product.stock - prods[index].product.unit_sold;
 
+                                    return <div style={{border:"1px solid black", padding:"10px", margin:'20px'}}>
+                                        <div className="row">
+                                            <div className="col-4" style={{height:'50vh', padding:"10px"}}>
+                                                <img alt="imagesrcc" width="100%" height="100%" src={this.state.products[index].product.main_photo} />
                                             </div>
-                                            <div className="col-3">
-                                                <img alt="imagesrcc" width="150%" height="100%" src={this.state.products[index].product.main_photo} />
+                                            <div className="col-2">
                                             </div>
-                                            <div className="col-1">
-                                            </div>
-                                            <div className="col-6">
-                                                    <h1 style={{ fontFamily: 'Courier New', textAlign: 'left', fontWeight: 'bold', verticalAlign: 'middle' }}>
-                                                        {this.state.products[index].product.name}
-                                                    </h1>
+                                            <div className="col-4">
+                                                <h1 style={{ fontFamily: 'Courier New', textAlign: 'left', fontWeight: 'bold', verticalAlign: 'middle' }}>
+                                                    {this.state.products[index].product.name}
+                                                </h1>
                                                 <div style={{height:'20px'}}></div>
                                                 <h3 style={{ fontFamily: 'Courier New', textAlign: 'left', fontWeight: 'bold', verticalAlign: 'middle' }}>
                                                     Rs. {this.state.products[index].product.price}
                                                 </h3>
+                                                <h3 style={{ fontFamily: 'Courier New', textAlign: 'left', fontWeight: 'bold', verticalAlign: 'middle' }}>
+                                                    Rs. {this.state.products[index].product.price}
+                                                </h3>
+                                                <h5 style={{ fontFamily: 'Courier New', textAlign: 'left', fontWeight: 'bold', verticalAlign: 'middle' }}>
+                                                    Stock: {left}
+                                                </h5>
                                                 <div style={{height:'20px'}}></div>
-
-
-                                            </div>
-                                            <div className="col-1">
                                             </div>
                                         </div>
                                         <div className="row">
@@ -152,9 +155,13 @@ class Buy extends Component{
                                             return
                                         else
                                         {
-                                            let prods=this.state.products;
-                                            prods[index].units=event.target.value;
-                                            this.setState({products:prods})
+                                            if (left < event.target.value) {
+                                                return;
+                                            }
+                                            else {
+                                                prods[index].units = event.target.value;
+                                                this.setState({products:prods})
+                                            }
                                         }
                                     }}
                                 />
@@ -166,7 +173,9 @@ class Buy extends Component{
                             <div style={{ height: '30px' }}>
 
                             </div>
-                                <h4>Your total amount is {this.totalAmount()}</h4>
+                                <h2 style={{ fontFamily: 'Courier New', textAlign: 'left', fontWeight: 'bold', verticalAlign: 'middle' }}>
+                                    Your total amount is Rs: 
+                                    {this.totalAmount()}</h2>
                             <div style={{ height: '30px' }}>
 
                             </div>
@@ -177,9 +186,11 @@ class Buy extends Component{
                             </label>
                         </form>
                     </div>
+
+                    <div className="col-sm-1">
+
+                    </div>
                 </div>
-                </div>
-            </div>
             
         )
     }
