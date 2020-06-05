@@ -213,6 +213,20 @@ router.get('/products', sellerCookieValidator, (req, res) => {
 })
 
 
+router.post('/deliveredStatus', sellerCookieValidator, (req, res) => {
+    // console.log(query, typeof(query.seller_id));
+    OrderModel.updateStatusToDelivered(req, (error, response) => {
+        if(response) {
+            // console.log(error);
+            res.status(200).send("updated");
+        }
+        if(error) {
+            // console.log(response);
+            res.status(501).send("error");
+        }
+    })
+})
+
 // debug routes
 router.get('/deleteAll', (req, res) => {
     ProductModel.deleteMany({}, (error, response) => {
@@ -226,6 +240,8 @@ router.get('/deleteAll', (req, res) => {
         }
     })  
 })
+
+
 
 module.exports = router
 

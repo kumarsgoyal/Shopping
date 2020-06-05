@@ -60,4 +60,11 @@ orderModel.addOrder = (req, callback) => {
     orderModel.create(order, callback);
 }
 
+orderModel.updateStatusToDelivered=(req, callback) => {
+    let review = {};
+    orderModel.update({_id:req.body.order_id}, {$set: {
+        status: "delivered"
+    }}, callback)
+}
+
 module.exports = orderModel; 
