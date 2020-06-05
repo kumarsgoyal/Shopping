@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import image from '../images/avatar.png'
-import SellerProducts from './sellerProducts.js';
-import SellerOrders from './sellerOrders.js';
+import { Link } from 'react-router-dom'
+import Button from '@material-ui/core/Button';
 
 let styles = {
 	flexColumn: {
@@ -35,7 +35,6 @@ class SellerProfile extends Component {
 		// console.log(this.props);
 		this.state = {
 			user: {
-				name: ''
 			}
 		}
 		this.redirectUpdateProfile = this.redirectUpdateProfile.bind(this);
@@ -81,61 +80,66 @@ class SellerProfile extends Component {
 	          
 	}
 	render() {
-		// console.log(this.state)
+		console.log(this.state)
 		let {user} = this.state;
 		return <div className='container-fluid' style={{height:'100vh'}}>
-			<div >
-				<div style={{height: '20vh'}}>
-					
-				</div>
-				<div className='row' style={{height: '70vh'}}>
-					<div className="col-1">
-
-					</div>
-					<div className="col-3" style={{height:'50vh'}}>	
-						<img style={styles.image} src={image} />
-					</div>
-					<div className="col-1">
-
-					</div>
-					<div className="col-6" style={{height:'80vh'}}>
-						<h style={{fontFamily:'Courier New', textAlign:'center', fontWeight:'bold', fontSize: '70px'}}>
-							{user.first_name + ' ' + user.last_name}
-                		</h>
-						<br />
-						<br />
-						<br />
-						<h style={{fontFamily:'Courier New', textAlign:'center', fontWeight:'bold', fontSize: '70px'}}>
-							{user.phone_no}
-                		</h>
-						<div style={{height: '20vh'}}>
-
-						</div>
-						<div>
-							<button onClick={this.redirectUpdateProfile} className='btn btn-primary'>Update Profile</button>		
-						</div>
-					</div>
-					<div className="col-1">
-
-					</div>
-
-				</div>
-
-				<div style={{height: '10vh'}}>
-
-				</div>
-
-
-				
+			<Link to='/Seller/AddNew'>
+                <Button color="primary" size="large" variant="contained">
+                    ADD NEW
+                </Button>
+            </Link>
+			<span style={{margin:'40px'}}>
+			</span>
+			<Link to='/Seller/Products'>
+                <Button color="primary" size="large" variant="contained">
+                    PRODUCTS
+                </Button>
+            </Link>
+			<span style={{margin:'40px'}}>
+			</span>
+			<Link to='/Seller/Orders'>
+                <Button color="primary" size="large" variant="contained">
+                    ORDER
+                </Button>
+            </Link>
+			<span style={{margin:'40px'}}>
+			</span>
+			<Link to='/Seller/Delivered'>
+                <Button color="primary" size="large" variant="contained">
+                    TRANSACTION
+                </Button>
+            </Link>
+			<hr/>
+			<div style={{height: '20vh'}}>		
 			</div>
-
-			<div className='row'>
-				<div className='col-12 col-md-6 p-0 rounded'>
-					<SellerProducts history={this.props.history}/>
+			<div className='row' style={{height: '70vh'}}>
+				<div className="col-1">
 				</div>
-				<div className='col-12 col-md-6 p-0 rounded'>
-					<SellerOrders history={this.props.history}/>
+				<div className="col-3" style={{height:'50vh'}}>	
+					<img style={styles.image} src={image} />
 				</div>
+				<div className="col-1">
+				</div>
+				<div className="col-6" style={{height:'80vh'}}>
+					<p style={{fontFamily:'Courier New', textAlign:'center', fontWeight:'bold', fontSize: '70px'}}>
+						{user.first_name + ' ' + user.last_name}
+                	</p>
+					<br />
+					<br />
+					<br />
+					<p style={{fontFamily:'Courier New', textAlign:'center', fontWeight:'bold', fontSize: '70px'}}>
+						{user.phone_no}
+                	</p>
+					<div style={{height: '20vh'}}>
+					</div>
+					<div>
+						<button onClick={this.redirectUpdateProfile} className='btn btn-primary'>UPDATE PROFILE</button>		
+					</div>
+				</div>
+				<div className="col-1">
+				</div>
+			</div>
+			<div style={{height: '10vh'}}>
 			</div>
 		</div>
 	}

@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 import Loader from 'react-loader'
-import Navbar from './navbarheading'
+import Navbar from './navbar'
 
 class Customers extends Component{
     constructor(props){
@@ -49,10 +49,10 @@ class Customers extends Component{
         }
 
         return <Loader loaded={this.state.loaded}>
-             <Navbar name="Customer Details" />
+            <Navbar name="Customer Details" />
             <div className="container-fluid">
-            {sel}
-        </div>
+                {sel}
+            </div>
         </Loader>
     }
 }

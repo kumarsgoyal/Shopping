@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CancelIcon from '@material-ui/icons/CancelOutlined';
-import HomeNavbar from './addProductnavbar.js';
+import HomeNavbar from './navbar.js';
 const Background = require("../images/particles3.jpg");
 
 var demo = {
@@ -45,6 +45,7 @@ class AddProduct extends Component {
         this.deleteFeature = this.deleteFeature.bind(this);
         this.deleteAdditionalImage = this.deleteAdditionalImage.bind(this);
     }
+
     deleteAdditionalImage(index) {
         let {additionalImages} = this.state;
         additionalImages.splice(index, 1);
@@ -59,9 +60,12 @@ class AddProduct extends Component {
 
     addAdditionalImage(e) {
         // e.preventDefault();
-        this.imageInputType = 'additionalImage';
-        this.fileReader.readAsDataURL(e.target.files[0]);
+        if(this.state.additionalImages.length <= 2) {
+            this.imageInputType = 'additionalImage';
+            this.fileReader.readAsDataURL(e.target.files[0]); 
+        }
     }
+
     handleSubmit(e) {
         e.preventDefault();
         let { productName: name, productPrice: price, stock: stock, selectedCategoryId: category_id, deliveryDays: estimated_days_to_deliver_by_seller, mainPhoto: main_photo, productFeatures: features, availableOptions: options, productDescription: description, additionalImages, update } = this.state
@@ -83,7 +87,7 @@ class AddProduct extends Component {
             url += 'addProduct';
         }
 
-        console.log(url, obj);
+        // console.log(url, obj);
 
         fetch(url, {
             method: 'POST',
@@ -94,9 +98,9 @@ class AddProduct extends Component {
             body: JSON.stringify(obj)
         })
             .then((res) => {
-                console.log(res);
+                // console.log(res);
                 if (res.ok) {
-                    console.log(res, 'success, and redirected to seller profile');
+                    console.log('success, and redirected to seller profile');
                     this.props.history.goBack();
                 }
                 else {
@@ -136,7 +140,6 @@ class AddProduct extends Component {
 
     onCategoryChange(e) {
         let { categories, selectedCategoryId, selectedCategoryName } = this.state;
-        console.log(e.target.value);
         categories.forEach((category) => {
             if (category.name === e.target.value) {
                 selectedCategoryId = category._id;
@@ -179,7 +182,7 @@ class AddProduct extends Component {
                 .then((res) => {
                     // console.log(res);
                     let {product} = res;
-                    console.log(product);
+                    // console.log(product);
                     let {name: productName, price: productPrice, stock: stock, description: productDescription, estimated_days_to_deliver_by_seller: deliveryDays, main_photo: mainPhoto, features: productFeatures} = product;
                     // console.log({productName, productPrice, productDescription, deliveryDays, mainPhoto, productFeatures});
                     this.setState({productName, productPrice, stock, productDescription, deliveryDays, mainPhoto, productFeatures});
@@ -267,7 +270,7 @@ class AddProduct extends Component {
 
         return (
             <div>
-                <HomeNavbar />
+                <HomeNavbar type='Add Product.' />
                 <div style={demo}>
                     <div style={{height:'100px'}}>
 
@@ -307,7 +310,6 @@ class AddProduct extends Component {
                                         fullWidth
                                         value={this.state.productPrice}
                                         onChange={(event) => {
-                                            console.log(event.target.value);
                                             if (event.target.value < 0)
                                                 return
                                             else
@@ -346,7 +348,6 @@ class AddProduct extends Component {
                                         fullWidth
                                         value={this.state.stock}
                                         onChange={(event) => {
-                                            console.log(event.target.value);
                                             if (event.target.value < 0)
                                                 return
                                             else
@@ -369,7 +370,6 @@ class AddProduct extends Component {
                                         fullWidth
                                         value={this.state.deliveryDays}
                                         onChange={(event) => {
-                                            console.log(event.target.value);
                                             if (event.target.value < 0)
                                                 return
                                             else
@@ -444,28 +444,6 @@ class AddProduct extends Component {
                                 </div>
 
                                 <hr />
-
-    {/*                             <div> */}
-    {/*                                 <h2 style={{ fontFamily: 'Courier New', textAlign: 'left', color: '#031dad', fontWeight: 'bold', verticalAlign: 'middle' }}> */}
-    {/*                                     Options Available. */}
-    {/*                                 </h2> */}
-    {/*                                 <TextField */}
-    {/*                                     id="optionTitleInput" */}
-    {/*                                     variant="outlined" */}
-    {/*                                     fullWidth */}
-    {/*                                     value={this.state.optionTitleInput}  */}
-    {/*                                     onChange={(e) => { this.setState({ optionTitleInput: e.target.value }) }} */}
-    {/*                                     label="options title e.g. size" */}
-    {/*                                 /> */}
-    {/*                                 <div style={{ height: '20px' }}> */}
-    {/*  */}
-    {/*                                 </div> */}
-    {/*                                 <Button variant="contained" component="span" size="large" color="primary" onClick={this.addFeature} fullWidth> */}
-    {/*                                     Add Option */}
-    {/*                                 </Button> */}
-    {/*                             </div> */}
-                                        
-                                {/* <hr /> */}
 
                                 <div>
                                     <h2 style={{ fontFamily: 'Courier New', textAlign: 'left', color: '#031dad', fontWeight: 'bold', verticalAlign: 'middle' }}>

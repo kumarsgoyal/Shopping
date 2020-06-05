@@ -23,6 +23,10 @@ import AdminCustomers from './Components/Admin/customers'
 import AdminProducts from './Components/Admin/products'
 import LoginAdmin from './Components/Login/loginadmin'
 import Buy from './Components/Buy/buy'
+import SellerProducts from './Components/Seller/sellerProducts.js';
+import SellerOrders from './Components/Seller/sellerOrders.js';
+import SellerDelivered from './Components/Seller/sellerDelivered.js';
+
 class App extends Component {
     constructor(props) {
         super(props);
@@ -57,12 +61,15 @@ class App extends Component {
                     <Route exact path='/Register' component={Register} />
                     <Route exact path='/Customer/Register' component={Registercust} />
                     <Route exact path='/Seller/Register' component={Registershop} />
-                    <Route exact path='/Seller' render={(props) => <Seller {...props} userInfo={this.state.userInfo} />} />
-                    <Route exact path='/Seller/AddNew' component={addProduct} />
                     <Route exact path='/Products' component={ProductsDisplay} />
                     <Route exact path='/Product/ProductDetails' component={ProductDetails} />
                     <Route exact path='/Product/AddReview' component={AddReview} />
                     <Route exact path='/Product/EditReview' component={EditReview} />
+                    <Route exact path='/Seller' render={(props) => <Seller {...props} userInfo={this.state.userInfo} />} />
+                    <Route exact path='/Seller/Products' render={(props) => <SellerProducts {...props} userInfo={this.state.userInfo} />} />
+                    <Route exact path='/Seller/Orders' render={(props) => <SellerOrders  {...props} userInfo={this.state.userInfo} />} />
+                    <Route exact path='/Seller/Delivered' render={(props) => <SellerDelivered  {...props} userInfo={this.state.userInfo} />} />
+                    <Route exact path='/Seller/AddNew' component={addProduct} />
                     <Route exact path='/Seller/update_product*' component={addProduct} />
                     <Route exact path='/Seller/update_profile' component={Registershop} />
                     <Route exact path='/cart' component={Cart} />

@@ -7,8 +7,7 @@ class Seller extends Component {
     render() {
     	return (
             <div style={{textAlign:'center'}}>
-                <HomeNavbar/>
-                <hr/ >
+                <HomeNavbar type='Welcome to Your Shop.'/>
                 <SellerProfile {...this.props}/>
             </div>
         );

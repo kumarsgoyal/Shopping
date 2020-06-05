@@ -15,7 +15,7 @@ class HomePage extends Component{
     render(){
         console.log(this.props);
         return ( <div>
-            <Navbar />
+            <Navbar name="NULL" />
             <div style={demo}>  
                 <Helmet>
                     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/499416/TweenLite.min.js" type="text/javascript" />

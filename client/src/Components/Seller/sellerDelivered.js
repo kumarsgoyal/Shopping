@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import List from './../productList/list.js';
 import HomeNavbar from './navbar';
 
-class SellerOrder extends Component {
+class SellerDelivered extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -36,7 +36,7 @@ class SellerOrder extends Component {
                 })
 	            .then((res) => {
 	                this.setState({orders: res.orders, loading: false})
-	                //this.setState({ products: res.products })
+	                // console.log(res)
 	            })
 	            .catch((err) => {
 	                console.log(err)
@@ -44,6 +44,7 @@ class SellerOrder extends Component {
 	}
 	render() {
 
+		
 		let item = <p style={{fontFamily:'Courier New', textAlign:'center', fontWeight:'bold', fontSize:'50px'}}>
             No Orders Found
 		</p>
@@ -54,11 +55,11 @@ class SellerOrder extends Component {
             </p>
 		}
 		else if(this.state.orders.length > 0)
-			item = <List type='order' orders={this.state.orders} history={this.props.history} />;
+			item = <List type='delivered' orders={this.state.orders} history={this.props.history} />;
 
 		return <div className='container-fluid' >
-			<HomeNavbar type='Orders.'/>
-			<hr/ >
+			<HomeNavbar type='Delivered.'/>
+			<hr />
 			<div style={{minHeight: '25vh', justifyContent: 'center'}}>
 				{item}
 			</div>
@@ -66,4 +67,4 @@ class SellerOrder extends Component {
 	}
 }
 
-export default SellerOrder;
+export default SellerDelivered;

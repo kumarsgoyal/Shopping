@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 import Loader from 'react-loader'
 import history from '../../history'
-import Navbar from './navbarheading'
+import Navbar from './navbar'
 import './style.css'
 
 class Sellers extends Component{
@@ -32,10 +32,16 @@ class Sellers extends Component{
         history.push({pathname:'/Admin/Products',state:{id:id}})
     }
     render(){
-        let sel=<div>not authorised</div>;
-        if(this.state.loaded&&this.state.sellers)
+        let sel = <div>
+                <div style={{height:'100px'}}>
+                </div>
+                <p style={{fontFamily:'Courier New', textAlign:'center', fontWeight:'bold', fontSize:'50px'}}>
+                    Not Authorised !!!
+                </p>
+            </div>;
+        if(this.state.loaded && this.state.sellers)
             {
-                sel = <table id="customers">
+                sel = <table id="seller">
                 <tbody>
                     <tr>
                         <th>Seller Name</th>

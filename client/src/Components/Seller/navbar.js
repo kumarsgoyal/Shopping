@@ -21,19 +21,12 @@ class HomeNavbar extends Component {
             </ul>
             </div>
             <div className="col-sm-4">
-                <Button size="large" disabled>
-                	<h2 style={{fontFamily:'Courier New', textAlign:'center', color:'#031dad', fontWeight:'bold'}}>
-                    	Welcome to Your Shop.
-                	</h2>
-                </Button>
+                	<p style={{fontFamily:'Courier New', textAlign:'center', color:'#031dad',fontSize:'30px', fontWeight:'bolder'}}>
+                    	{this.props.type}
+                	</p>
             </div>
             <div className="col-sm-4">
                 
-                <Link to='/Seller/AddNew'>
-                    <Button color="primary" size="large" variant="contained">
-                        ADD NEW
-                    </Button>
-                </Link>
             </div>
             </nav>
         </div>

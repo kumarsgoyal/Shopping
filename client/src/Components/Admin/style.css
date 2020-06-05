@@ -81,3 +81,27 @@
    background-color: #4CAF50;
    color: white;
  }
+ 
+
+ #seller {
+   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+   border-collapse: collapse;
+   width: 100%;
+ }
+ 
+ #seller td, #seller th {
+   border: 1px solid #ddd;
+   padding: 8px;
+ }
+ 
+ #seller tr:nth-child(even){background-color: #f2f2f2;}
+ 
+ #seller tr:hover {background-color: #ddd;}
+ 
+ #seller th {
+   padding-top: 12px;
+   padding-bottom: 12px;
+   text-align: left;
+   background-color: #4CAF50;
+   color: white;
+ }

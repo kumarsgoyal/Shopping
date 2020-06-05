@@ -139,7 +139,7 @@ class Logincomp extends Component {
 								</div>
 								<Button color="primary" size="large" variant="contained" type="submit">
 									Login
-                            </Button>
+                            	</Button>
 							</form>
 							<div style={{ height: '50px' }}>
 							</div>

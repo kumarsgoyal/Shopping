@@ -1,40 +1,6 @@
 import React, {Component} from 'react';
 import List from './../productList/list.js';
-
-// let products = [
-// 	{
-// 		_id: 'akfsjakl234fkdl',
-// 		name: 'lala lala',
-// 		price: '200',
-// 		avg_rating: 4,
-// 		no_of_reviews: 10,
-// 		main_photo: image
-// 	},
-// 	{
-// 		_id: 'akfsjakl234fkdl',
-// 		name: 'lala lala',
-// 		price: '200',
-// 		avg_rating: 4,
-// 		no_of_reviews: 10,
-// 		main_photo: image	
-// 	},
-// 	{
-// 		_id: 'akfsjakl234fkdl',
-// 		name: 'lala lala',
-// 		price: '200',
-// 		avg_rating: 4,
-// 		no_of_reviews: 10,
-// 		main_photo: image
-// 	},
-// 	{
-// 		_id: 'akfsjakl234fkdl',
-// 		name: 'lala lala',
-// 		price: '200',
-// 		avg_rating: 4,
-// 		no_of_reviews: 10,
-// 		main_photo: image
-// 	}
-// ]
+import HomeNavbar from './navbar';
 
 class SellerProduct extends Component {
 	constructor(props) {
@@ -79,20 +45,23 @@ class SellerProduct extends Component {
 	}
 	render() {
 		
-		let item = <h4>No Products Found</h4>
+		let item = <p style={{fontFamily:'Courier New', textAlign:'center', fontWeight:'bold', fontSize:'50px'}}>
+            No Orders Found
+		</p>
+
 		if(this.state.loading) {
-			item = <h4>Loading....</h4>
+			item = <p style={{fontFamily:'Courier New', textAlign:'center', fontWeight:'bold', fontSize:'50px'}}>
+                Loading....
+            </p>
 		}
 		else if(this.state.products && this.state.products.length > 0)
 			item = <List type='product' products={this.state.products} history={this.props.history}/>
 			
-		return <div className='container-fluid' style={{backgroundColor: 'rgba(234, 234, 234, 0.86)'}}>
-			<div className='row pl-2 py-2'>
-				<h1 className='col-12 m-0 text-center font-weight-bold bg-white rounded'>
-					Products
-				</h1>
-			</div>
-			<div style={{minHeight: '25vh', display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+		return <div className='container-fluid'>
+			<HomeNavbar type='Products.' />
+			<hr/ >
+			{/* <div style={{minHeight: '25vh', display: 'flex', flexDirection: 'column', justifyContent: 'center'}}> */}
+			<div style={{minHeight: '25vh', justifyContent: 'center'}} >
 				{item}
 			</div>
 		</div>

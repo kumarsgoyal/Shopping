@@ -127,7 +127,12 @@ class ProductsList extends Component {
             return <div>
 		    <Navbar {...this.props} />
             <hr />
-		    <h3>No items match your search</h3>
+            <div style={{height:'100px'}}>
+
+            </div>
+            <p style={{fontFamily:'Courier New', textAlign:'center', fontWeight:'bold', fontSize:'50px'}}>
+                No items Added
+		    </p>
 	    </div>
         else
         {
