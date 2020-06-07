@@ -1,6 +1,7 @@
 import React,{Component} from 'react'
 import TextField from '@material-ui/core/TextField';
 import history from '../../history'
+
 class Search extends Component{
 
 	constructor(props){
@@ -21,7 +22,7 @@ class Search extends Component{
 	    event.preventDefault();
 		if(this.state.inputValue.length>0)
 		{
-			this.props.history.push({pathname:'/Products',state:{inputValue:this.state.inputValue}});
+			history.push({pathname:'/Products',state:{inputValue:this.state.inputValue}});
 		}
 	  }
   
