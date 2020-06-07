@@ -102,12 +102,48 @@ class Order extends Component {
                 console.log(error);
             })
     }
+    handleCancelOrder=()=>{
+        let obj = {order_id: this.props.order._id};
+        
+        fetch('http://localhost:5000/customer/cancelledStatus', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json', 'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify(obj)
+
+        }).then((res) =>{
+                if(res.status === 200){
+                    window.location.reload(false);
+                }
+                else if(res.status === 401) {
+                    // console.log('unauthorized');
+                    this.props.history.push({
+                        pathname: '/Customer/Login',
+                        state: {
+                            isRedirected: true
+                        }
+                    })
+                }
+                else {
+                    throw 'error'
+                }
+            })
+            .catch((error) =>{
+                console.log(error);
+            })
+    }
     render() {
         let {_id, product_id, total_amount, units, expected_delivery_date, order_date, delivery_address, status} = this.props.order;
         let del_but=<div></div>
         if(this.props.button)
             del_but=<div className="col-2">
                 <button onClick={this.handleClick} className='btn btn-primary'>DELIVERED</button>
+            </div>
+        if(this.props.cancel_button==true)
+            del_but=<div className="col-2">
+                <button onClick={this.handleCancelOrder} className='btn btn-primary'>CANCEL ORDER</button>
             </div>
         return <div style={{textAlign:'justify'}} className="row hover-blue">
             <div className="col-1">
@@ -212,7 +248,7 @@ class simpleList extends Component {
                 list = this.state.orders.map((x, index) => {
                     if(x.status == "delivery_pending") {
                         return <div>
-                            <Order button={bt} key={index} order={x} history={this.props.history} />
+                            <Order cancel_button={true} button={bt} key={index} order={x} history={this.props.history} />
                             <hr style={{width:'84%'}}/>
                         </div>
                     }
