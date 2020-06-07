@@ -26,6 +26,9 @@ import Buy from './Components/Buy/buy'
 import SellerProducts from './Components/Seller/sellerProducts.js';
 import SellerOrders from './Components/Seller/sellerOrders.js';
 import SellerDelivered from './Components/Seller/sellerDelivered.js';
+import ClientProfile from './Components/Client/clientProfile'
+import ClientPendingOrders from './Components/Client/pendingOrders'
+import ClientDeliveredOrders from './Components/Client/deliveredOrders'
 
 class App extends Component {
     constructor(props) {
@@ -61,10 +64,15 @@ class App extends Component {
                     <Route exact path='/Register' component={Register} />
                     <Route exact path='/Customer/Register' component={Registercust} />
                     <Route exact path='/Seller/Register' component={Registershop} />
+                    <Route exact path='/Customer/Profile' component={ClientProfile} />
+                    <Route exact path='/Customer/PendingOrders' component={ClientPendingOrders} />
+                    <Route exact path='/Customer/DeliveredOrders' component={ClientDeliveredOrders} />
+                    <Route exact path='/cart' component={Cart} />
                     <Route exact path='/Products' component={ProductsDisplay} />
                     <Route exact path='/Product/ProductDetails' component={ProductDetails} />
                     <Route exact path='/Product/AddReview' component={AddReview} />
                     <Route exact path='/Product/EditReview' component={EditReview} />
+                    <Route exact path='/Product/Buy' component={Buy} />
                     <Route exact path='/Seller' render={(props) => <Seller {...props} userInfo={this.state.userInfo} />} />
                     <Route exact path='/Seller/Products' render={(props) => <SellerProducts {...props} userInfo={this.state.userInfo} />} />
                     <Route exact path='/Seller/Orders' render={(props) => <SellerOrders  {...props} userInfo={this.state.userInfo} />} />
@@ -72,13 +80,11 @@ class App extends Component {
                     <Route exact path='/Seller/AddNew' component={addProduct} />
                     <Route exact path='/Seller/update_product*' component={addProduct} />
                     <Route exact path='/Seller/update_profile' component={Registershop} />
-                    <Route exact path='/cart' component={Cart} />
                     <Route exact path='/Admin/HomePage' component={AdminHome} />
                     <Route exact path='/Admin/Sellers' component={AdminSellers} />
                     <Route exact path='/Admin/Customers' component={AdminCustomers} />
                     <Route exact path='/Admin/Products' component={AdminProducts} />
                     <Route exact path='/Admin/Login' component={LoginAdmin} />
-                    <Route exact path='/Product/Buy' component={Buy} />
                     <Route path='/*' component={Pagenotfound} />
                 </Switch>
             </Router>
