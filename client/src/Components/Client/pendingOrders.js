@@ -36,7 +36,6 @@ class pendingOrders extends Component {
                 })
 	            .then((res) => {
 	                this.setState({orders: res.orders, loading: false})
-	                console.log(res)
 	                //this.setState({ products: res.products })
 	            })
 	            .catch((err) => {
@@ -55,7 +54,7 @@ class pendingOrders extends Component {
 			</p>
 			}
 		else if(this.state.orders.length > 0)
-			item = <List type='order' orders={this.state.orders} history={this.props.history} />;
+			item = <List type='orders' orders={this.state.orders} history={this.props.history} deliverButton={false}/>;
 
 		return <div className='container-fluid' >
 		<HomeNavbar type='Order.'/>
