@@ -13,7 +13,7 @@ class HomeNavbar extends Component {
         fetch('http://localhost:5000/logout',{
             method:"GET",
             credentials:"include"
-        }).then(history.push('./Customer/Login'))
+        }).then(history.push('/Customer/Login'))
     }
 
     render() {
