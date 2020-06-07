@@ -75,4 +75,11 @@ orderModel.updateStatusToDelivered=(req, callback) => {
     }}, callback)
 }
 
+orderModel.updateStatusToCancelled=(req, callback) => {
+    let review = {};
+    orderModel.update({_id:req.body.order_id}, {$set: {
+        status: "cancelled"
+    }}, callback)
+}
+
 module.exports = orderModel; 
