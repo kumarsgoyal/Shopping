@@ -104,143 +104,77 @@ class Order extends Component {
     }
     render() {
         let {_id, product_id, total_amount, units, expected_delivery_date, order_date, delivery_address, status} = this.props.order;
-        
-        if(this.props.button) {
-            console.log(this.props.order);
-            return <div style={{textAlign:'justify', overflow:'scroll'}} className="row hover-blue">
-                <div className="col-1">
-                </div>
+        let del_but=<div></div>
+        if(this.props.button)
+            del_but=<div className="col-2">
+                <button onClick={this.handleClick} className='btn btn-primary'>DELIVERED</button>
+            </div>
+        return <div style={{textAlign:'justify'}} className="row hover-blue">
+            <div className="col-1">
+            </div>
 
-                <div className="col-3" style={{textAlign:'justify'}}>
-                    <div className="row heading">
-                        <h5 className='font-weight-bold'>Order Id:</h5>
-                        <span style={{margin:'0px 20px'}}></span>
-                    </div>
-                    <div className='row heading' style={{textAlign:'justify'}}>
-                        <h5 className='font-weight-bold'>Product Id: </h5>
-                        <span style={{margin:'0px 20px'}}></span>
-                    </div>
-                    <div className='row heading' >
-                        <h5 className='font-weight-bold'>Delivery Address:</h5>
-                        <span style={{margin:'0px 20px'}}></span>
-                    </div>
-                    <div className='row heading' >
-                        <h5 className='font-weight-bold'>Order Date:</h5>
-                        <span style={{margin:'0px 20px'}}></span>
-                    </div>
-                    <div className='row heading' >
-                        <h5 className='font-weight-bold'>Expected Date:</h5>
-                        <span style={{margin:'0px 20px'}}></span>
-                    </div>
-                    <div className='row heading'>
-                        <h4>Units purchased:</h4>
-                        <span style={{margin:'0px 20px'}}></span>
-                    </div>
-                    <div className='row heading' >
-                        <h5 className='font-weight-bold'>Total Amoun:t</h5>
-                        <span style={{margin:'0px 20px'}}></span>
-                    </div>
-                    <div className='row heading' >
-                        <h5 className='font-weight-bold'>Delivery Status:</h5>
-                        <span style={{margin:'0px 20px'}}></span>
-                    </div>
+            <div className="col-3" style={{textAlign:'justify'}}>
+                <div className="row heading">
+                    <h5 className='font-weight-bold'>Order Id:</h5>
+                    <span style={{margin:'0px 20px'}}></span>
                 </div>
-                <div className="col-6" style={{textAlign:'justify', overflow:'scroll'}}>
-                    <div className="row heading">
-                        <h5 style={{textAlign:'inherit'}}>{_id}</h5>
-                    </div>
-                    <div className='row heading' style={{textAlign:'justify'}}>
-                        <h5 style={{textAlign:'inherit'}}>{product_id}</h5>
-                    </div>
-                    <div className='row heading' >
-                        <h5>{delivery_address}</h5>
-                    </div>
-                    <div className='row heading' >
-                        <h5>{order_date.toLocaleString()}</h5>
-                    </div>
-                    <div className='row heading' >
-                        <h5>{expected_delivery_date.toLocaleString()}</h5>
-                    </div>
-                    <div className='row heading'>
-                        <h5>{units}</h5>
-                    </div>
-                    <div className='row heading' >
-                        <h5>₹{total_amount}</h5>
-                    </div>
-                    <div className='row heading' >
-                        <h5>{status}</h5>
-                    </div>
+                <div className='row heading' style={{textAlign:'justify'}}>
+                    <h5 className='font-weight-bold'>Product Id: </h5>
+                    <span style={{margin:'0px 20px'}}></span>
                 </div>
-                <div className="col-2">
-                    <button onClick={this.handleClick} className='btn btn-primary'>DELIVERED</button>
+                <div className='row heading' >
+                    <h5 className='font-weight-bold'>Delivery Address:</h5>
+                    <span style={{margin:'0px 20px'}}></span>
                 </div>
+                <div className='row heading' >
+                    <h5 className='font-weight-bold'>Order Date:</h5>
+                    <span style={{margin:'0px 20px'}}></span>
+                </div>
+                <div className='row heading' >
+                    <h5 className='font-weight-bold'>Expected Date:</h5>
+                    <span style={{margin:'0px 20px'}}></span>
+                </div>
+                <div className='row heading'>
+                    <h4>Units purchased:</h4>
+                    <span style={{margin:'0px 20px'}}></span>
+                </div>
+                <div className='row heading' >
+                    <h5 className='font-weight-bold'>Total Amount</h5>
+                    <span style={{margin:'0px 20px'}}></span>
+                </div>
+                <div className='row heading' >
+                    <h5 className='font-weight-bold'>Delivery Status:</h5>
+                    <span style={{margin:'0px 20px'}}></span>
+                </div>
+            </div>
+            <div className="col-6" style={{textAlign:'justify'}}>
+                <div className="row heading">
+                    <h5 style={{textAlign:'inherit'}}>{_id}</h5>
+                </div>
+                <div className='row heading' style={{textAlign:'justify'}}>
+                    <h5 style={{textAlign:'inherit'}}>{product_id}</h5>
+                </div>
+                <div className='row heading' >
+                    <h5>{delivery_address}</h5>
+                </div>
+                <div className='row heading' >
+                    <h5>{order_date.toLocaleString()}</h5>
+                </div>
+                <div className='row heading' >
+                    <h5>{expected_delivery_date.toLocaleString()}</h5>
+                </div>
+                <div className='row heading'>
+                    <h5>{units}</h5>
+                </div>
+                <div className='row heading' >
+                    <h5>₹{total_amount}</h5>
+                </div>
+                <div className='row heading' >
+                    <h5>{status}</h5>
+                </div>
+            </div>
+            {del_but} 
         </div >
-        }
-        else {
-            return <div style={{textAlign:'justify', overflow:'scroll'}} className="row hover-blue">
-                <div className="col-1">
-                </div>
-
-                <div className="col-3" style={{textAlign:'justify'}}>
-                    <div className="row heading">
-                        <h5 className='font-weight-bold'>Order Id:</h5>
-                        <span style={{margin:'0px 20px'}}></span>
-                    </div>
-                    <div className='row heading' style={{textAlign:'justify'}}>
-                        <h5 className='font-weight-bold'>Product Id: </h5>
-                        <span style={{margin:'0px 20px'}}></span>
-                    </div>
-                    <div className='row heading' >
-                        <h5 className='font-weight-bold'>Delivery Address:</h5>
-                        <span style={{margin:'0px 20px'}}></span>
-                    </div>
-                    <div className='row heading' >
-                        <h5 className='font-weight-bold'>Order Date:</h5>
-                        <span style={{margin:'0px 20px'}}></span>
-                    </div>
-                    
-                    <div className='row heading'>
-                        <h4>Units purchased:</h4>
-                        <span style={{margin:'0px 20px'}}></span>
-                    </div>
-                    <div className='row heading' >
-                        <h5 className='font-weight-bold'>Total Amoun:t</h5>
-                        <span style={{margin:'0px 20px'}}></span>
-                    </div>
-                    <div className='row heading' >
-                        <h5 className='font-weight-bold'>Delivery Status:</h5>
-                        <span style={{margin:'0px 20px'}}></span>
-                    </div>
-                </div>
-                <div className="col-6" style={{textAlign:'justify'}}>
-                    <div className="row heading">
-                        <h5 style={{textAlign:'inherit'}}>{_id}</h5>
-                    </div>
-                    <div className='row heading' style={{textAlign:'justify'}}>
-                        <h5 style={{textAlign:'inherit'}}>{product_id}</h5>
-                    </div>
-                    <div className='row heading' >
-                        <h5>{delivery_address}</h5>
-                    </div>
-                    <div className='row heading' >
-                        <h5>{order_date.toLocaleString()}</h5>
-                    </div>
-
-                    <div className='row heading'>
-                        <h5>{units}</h5>
-                    </div>
-                    <div className='row heading' >
-                        <h5>₹{total_amount}</h5>
-                    </div>
-                    <div className='row heading' >
-                        <h5>{status}</h5>
-                    </div>
-                </div>
-                <div className="col-2">
-
-                </div>
-            </div >
-        }
     }
 }
 
@@ -271,8 +205,20 @@ class simpleList extends Component {
     }
     render() {
         let list;
+        console.log(this.props);
         if (this.state.show_list) {
-            if(this.props.type == 'order') {
+            if(this.props.deliverButton==false){
+                let bt = false;
+                list = this.state.orders.map((x, index) => {
+                    if(x.status == "delivery_pending") {
+                        return <div>
+                            <Order button={bt} key={index} order={x} history={this.props.history} />
+                            <hr style={{width:'84%'}}/>
+                        </div>
+                    }
+                })
+            }
+            else if(this.props.type == 'order') {
                 let bt = true;
                 list = this.state.orders.map((x, index) => {
                     if(x.status == "delivery_pending")
@@ -291,7 +237,6 @@ class simpleList extends Component {
                             <hr style={{width:'84%'}}/>
                         </div>
                     }
-
                 })
             }
             else {
