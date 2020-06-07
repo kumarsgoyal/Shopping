@@ -279,4 +279,17 @@ router.get('/deliveredOrders',customerCookieValidator,(req,res)=>{
     })
 })
 
+router.post('/cancelledStatus', customerCookieValidator, (req, res) => {
+    OrderModel.updateStatusToCancelled(req, (error, response) => {
+        if(response) {
+            // console.log(error);
+            res.status(200).send("updated");
+        }
+        if(error) {
+            // console.log(response);
+            res.status(501).send("error");
+        }
+    })
+})
+
 module.exports = router
