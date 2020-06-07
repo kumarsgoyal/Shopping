@@ -47,20 +47,8 @@ app.use(session({
 }))
 
 
-const aunt = (req, res, next) => {
-    if(req.session.email) {
-        next();
-    }
-}
-
-const logt = (req, res, next) => {
-    if(req.session.email) {
-        req.session.email = null;
-        next();
-    }
-    else {
-        res.status(401);
-    }
+const logt = (req, res) => {
+    req.session.destroy();
 }
 
 
@@ -72,6 +60,7 @@ app.use('/product', product);
 app.use('/customer', customer);
 app.use('/reviews', review);
 app.use('/admin',admin);
+app.get('/logout',logt);
 
 app.listen(port, () => {
     console.log('server is running on port' + port);

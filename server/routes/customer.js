@@ -241,4 +241,42 @@ router.put('/editProductReview',customerCookieValidator,(req,res)=>{
     })
 })
 
+router.get('/getLoggedInUserInfo', customerCookieValidator, (req, res) => {
+    ClientModel.findOne({_id: req.session.user_id}, (err, user) => {
+        if(err) {
+            res.status(501).send("error");
+        }
+        if(user) {
+            res.status(200).send({user})
+        }
+    })
+})
+
+
+router.get('/pendingOrders',customerCookieValidator,(req,res)=>{
+    OrderModel.getPendingOrders(req, (error, response) => {
+        if(error) {
+            // console.log(error);
+            res.status(501).send("error");
+        }
+        if(response) {
+            // console.log(response);
+            res.status(200).send({orders: response});
+        }
+    })
+})
+
+router.get('/deliveredOrders',customerCookieValidator,(req,res)=>{
+    OrderModel.getDeliveredOrders(req, (error, response) => {
+        if(error) {
+            // console.log(error);
+            res.status(501).send("error");
+        }
+        if(response) {
+            // console.log(response);
+            res.status(200).send({orders: response});
+        }
+    })
+})
+
 module.exports = router

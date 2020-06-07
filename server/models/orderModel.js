@@ -46,6 +46,14 @@ orderModel.getSellerOrders = (req, callback) => {
     orderModel.find({seller_id: req.session.user_id}, callback)
 }
 
+orderModel.getPendingOrders = (req, callback) => {
+    orderModel.find({customer_id: req.session.user_id,status:"delivery_pending"}, callback)
+}
+
+orderModel.getDeliveredOrders = (req, callback) => {
+    orderModel.find({customer_id: req.session.user_id,status:"delivered"}, callback)
+}
+
 orderModel.addOrder = (req, callback) => {
     let product = req.body.product;
     let cust_id = req.session.user_id;
