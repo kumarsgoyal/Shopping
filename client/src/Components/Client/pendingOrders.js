@@ -54,7 +54,7 @@ class pendingOrders extends Component {
 			</p>
 			}
 		else if(this.state.orders.length > 0)
-			item = <List type='orders' orders={this.state.orders} history={this.props.history} deliverButton={false}/>;
+			item = <List type='order' orders={this.state.orders} history={this.props.history} deliverButton={false}/>;
 
 		return <div className='container-fluid' >
 		<HomeNavbar type='Order.'/>
