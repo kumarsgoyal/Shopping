@@ -51,7 +51,16 @@ class Buy extends Component{
                     credentials: 'include',
                     body: JSON.stringify(order)
                 }).then(res=>{
-                    history.push({pathname:'/Products', state:{inputValue:""}})
+                    if(res.status === 401) {
+                        history.push({
+                            pathname: '/Customer/Login',
+                            state: {
+                                isRedirected: true
+                            }
+                        })
+                    }
+                    else if(res.status === 200)
+                        history.push({pathname:'/Customer/PendingOrders', state:{inputValue:""}})
                     if(this.props.location.state.throughCart){
                         let obj = {product_id: elem.product._id}
                         fetch('http://localhost:5000/customer/removeFromCart', {
@@ -104,7 +113,7 @@ class Buy extends Component{
                                 </div>
                                 {this.state.products.map((elem, index)=>{
                                     let prods = this.state.products;
-                                    let left = prods[index].product.stock - prods[index].product.unit_sold;
+                                    let left = prods[index].product.stock - prods[index].product.unit_sold < 0? 0 : (prods[index].product.stock - prods[index].product.unit_sold);
 
                                     return <div style={{border:"1px solid black", padding:"10px", margin:'20px'}}>
                                         <div className="row">
