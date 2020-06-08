@@ -109,6 +109,7 @@ const checkInStock = (req, res, next) => {
         }
         if(error) {
             console.log(error);
+            res.status(501).send("error, in adding order");
         }
     })
 }
