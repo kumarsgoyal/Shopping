@@ -146,12 +146,11 @@ class ProductsDetails extends Component {
 
     }
     buyNow=()=>{
-        let productToBuy=[]
+        let productToBuy = []
         productToBuy.push(this.state.productDetails);
         history.push({pathname:'/Product/Buy',state:{products:productToBuy,throughCart:false}})
     }
     render(){
-
         let addToCart = <Button onClick={this.addToCart} variant="contained" color="primary" size="large">
             Add to Cart                
         </Button>
@@ -163,11 +162,11 @@ class ProductsDetails extends Component {
         }
 
         let imagedis;
-        if(this.state.images.length===0)
+        if(this.state.images.length === 0)
             imagedis = <img src={this.state.productDetails.main_photo} height="100%"/>
         else
             imagedis = <ImageSlides images={this.state.images} />
-        return <Loader loaded={this.state.loaded1&&this.state.loaded2}>
+            return <Loader loaded={this.state.loaded1&&this.state.loaded2}>
             <div className="container-fluid">
                 <Navbar {...this.props} />
                 <hr />
@@ -253,7 +252,6 @@ class ProductsDetails extends Component {
             </div>
         </Loader>
     }
-
 }
 
 export default ProductsDetails

@@ -10,6 +10,7 @@ class pendingOrders extends Component {
 			loading: true
 		}
 	}
+	
 	componentDidMount() {
 		fetch(`http://localhost:5000/customer/pendingOrders`, {
 	            method: 'GET',

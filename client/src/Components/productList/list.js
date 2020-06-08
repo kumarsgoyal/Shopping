@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './styles.css'
 import { Button } from '@material-ui/core';
+import history from '../../history'
 
 class Product extends Component {
     constructor(props) {
@@ -66,6 +67,10 @@ class Order extends Component {
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
+    }
+    handleClickdetail=(event) => {
+        event.preventDefault();
+        history.push({pathname:'/Product/ProductDetails', state:{id: this.props.order.product_id}})
     }
 
     handleClick() {
@@ -149,7 +154,8 @@ class Order extends Component {
             <div className="col-1">
             </div>
 
-            <div className="col-3" style={{textAlign:'justify'}}>
+            <div className="col-4" style={{textAlign:'justify'}}>
+                <button style={{backgroundColor:"transparent",border:"none",outline:"none"}} onClick={this.handleClickdetail}>
                 <div className="row heading">
                     <h5 className='font-weight-bold'>Order Id:</h5>
                     <span style={{margin:'0px 20px'}}></span>
@@ -182,8 +188,10 @@ class Order extends Component {
                     <h5 className='font-weight-bold'>Delivery Status:</h5>
                     <span style={{margin:'0px 20px'}}></span>
                 </div>
+                </button>
             </div>
-            <div className="col-6" style={{textAlign:'justify'}}>
+            <div className="col-5" style={{textAlign:'justify'}}>
+                <button style={{backgroundColor:"transparent",border:"none",outline:"none"}} onClick={this.handleClickdetail}>
                 <div className="row heading">
                     <h5 style={{textAlign:'inherit'}}>{_id}</h5>
                 </div>
@@ -208,6 +216,7 @@ class Order extends Component {
                 <div className='row heading' >
                     <h5>{status}</h5>
                 </div>
+                </button>
             </div>
             {del_but} 
         </div >
@@ -215,6 +224,7 @@ class Order extends Component {
 }
 
 class simpleList extends Component {
+
     constructor(props){
         super(props)
         // console.log(this.props)
@@ -241,9 +251,8 @@ class simpleList extends Component {
     }
     render() {
         let list;
-        console.log(this.props);
         if (this.state.show_list) {
-            if(this.props.deliverButton==false){
+            if(this.props.deliverButton == false){
                 let bt = false;
                 list = this.state.orders.map((x, index) => {
                     if(x.status == "delivery_pending") {
@@ -260,7 +269,7 @@ class simpleList extends Component {
                     if(x.status == "delivery_pending")
                         return <div>
                             <Order button={bt} key={index} order={x} history={this.props.history} />
-                                <hr style={{width:'84%'}}/>
+                            <hr style={{width:'84%'}}/>
                         </div>
                 })
             }
@@ -269,7 +278,7 @@ class simpleList extends Component {
                 list = this.state.orders.map((x, index) => {
                     if(x.status == "delivered") {
                         return <div>
-                            <Order button={bt} key={index} order={x} history={this.props.history} />
+                            <Order button={bt} key={index} order={x} history={this.props.history} />>
                             <hr style={{width:'84%'}}/>
                         </div>
                     }
