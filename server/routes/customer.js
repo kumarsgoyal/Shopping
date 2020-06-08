@@ -95,9 +95,28 @@ router.post('/register', function(req, res) {
 })
 
 
+const checkInStock = (req, res, next) => {
+    console.log("check in stock called");
+    ProductModel.findOne({_id: req.body.product._id}, (error, result)=> {
+        if(result) {
+            console.log(result.stock, result.unit_sold, req.body.units);
+            if(result.stock - result.unit_sold >= req.body.units) {
+                next();
+            }
+            else {
+                res.status(200).send({error: true, message: "not available in stock"});
+            }
+        }
+        if(error) {
+            console.log(error);
+        }
+    })
+}
 
-router.post('/addOrder', customerCookieValidator, (req, res) => {
+
+router.post('/addOrder', customerCookieValidator, checkInStock, (req, res) => {
     console.log("sasasa");
+
     OrderModel.addOrder(req, (error, response) => {
         // req.body = {product, delivery_address, units}
         if(error) {
