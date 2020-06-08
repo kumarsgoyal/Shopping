@@ -99,7 +99,7 @@ class ProductsDetails extends Component {
         url+='?product_id=';
         url+=id;
         fetch(url).then(res=>res.json())
-        .then(res=>this.setState({loaded1:true, productDetails:res.product, left: res.product.stock-res.product.unit_sold}));
+        .then(res=>this.setState({loaded1:true, productDetails:res.product, left: res.product.stock-res.product.unit_sold<0 ? 0 : res.product.stock-res.product.unit_sold}));
         url = 'http://localhost:5000/product/images';
         url+='?product_id=';
         url+=id;
